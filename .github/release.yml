@@ -1,0 +1,27 @@
+name: Release
+
+on:
+    push:
+        branches:
+            - master
+jobs:
+    release:
+        runs-on: ubuntu-18.04
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+            - uses: actions/setup-node@v1
+              with:
+                  node-version: 14
+            - name: Restore node_modules cache
+              uses: actions/cache@v2
+              with:
+                  path: '**/node_modules'
+                  key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+            - name: Install packages
+              run: yarn
+            - run: yarn release
+              env:
+                  GH_TOKEN: ${{ secrets.GPR_PUBLISH_TOKEN }}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  NPM_TOKEN: ${{ secrets.GPR_PUBLISH_TOKEN }}

@@ -1,6 +1,9 @@
 {
   "name": "next-mono-repo",
   "version": "1.0.0",
+  "workspaces": [
+    "packages/*"
+  ],
   "private": true,
   "license": "MIT",
   "main": "index.js",
@@ -33,5 +36,8 @@
     "next-transpile-modules": "^3.3.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }

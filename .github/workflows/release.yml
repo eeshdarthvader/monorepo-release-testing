@@ -4,6 +4,11 @@ on:
     push:
         branches:
             - master
+env:
+    GH_SECRET: ${{ secrets.GH_SECRET }}
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    HUSKY_SKIP_INSTALL: true
+            
 jobs:
     release:
         runs-on: ubuntu-18.04

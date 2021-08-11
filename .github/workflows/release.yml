@@ -26,3 +26,5 @@ jobs:
             - name: Install packages
               run: yarn
             - run: yarn release
+              env:
+                GH_TOKEN: ${{ secrets.GPR_TOKEN }}

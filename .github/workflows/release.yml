@@ -4,6 +4,10 @@ on:
     push:
         branches:
             - master
+env:
+    GPR_TOKEN: ${{ secrets.GPR_TOKEN }}
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    HUSKY_SKIP_INSTALL: true
             
 jobs:
     release:
@@ -11,8 +15,6 @@ jobs:
         steps:
             - name: Checkout
               uses: actions/checkout@v2
-              env:
-                  GH_TOKEN: ${{ secrets.GPR_PUBLISH_TOKEN }}
             - uses: actions/setup-node@v1
               with:
                   node-version: 14
@@ -23,10 +25,4 @@ jobs:
                   key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
             - name: Install packages
               run: yarn
-              env:
-                  GH_TOKEN: ${{ secrets.GPR_PUBLISH_TOKEN }}
             - run: yarn release
-              env:
-                  GH_TOKEN: ${{ secrets.GPR_PUBLISH_TOKEN }}
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  NPM_TOKEN: ${{ secrets.GPR_PUBLISH_TOKEN }}
